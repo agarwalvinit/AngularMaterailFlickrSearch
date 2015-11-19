@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>Flickr Search</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body ng-app="flickrApp" ng-controller="ListController" layout="column" layout-align="top center" ng-cloak="">
+    <md-toolbar>
+        <div class="md-toolbar-tools">
+            <span class="md-flex">Flickr Search</span>
+        </div>
+    </md-toolbar>
+
+    <md-content class="content-app" layout="column" layout-align="center center">
+        <div class="contentWidth">
+            <form ng-submit="search()">
+                <div ng-show="!isSearching">
+                    <md-input-container flex>
+                        <label>Search For</label>
+                        <input required name="searchFor" ng-model="projectSearch">
+                    </md-input-container>
+                </div>
+                <md-progress-circular ng-if="isSearching" md-mode="indeterminate" layout-align="center center"></md-progress-circular>
+            </form>
+            <div id="noResult"></div>
+            <md-card class="md-padding" ng-repeat="pics in results.photos.photo">
+                <img ng-src="https://farm{{pics.farm}}.staticflickr.com/{{pics.server}}/{{pics.id}}_{{pics.secret}}_b.jpg">
+                <h3>{{pics.title}}</h3>
+            </md-card>
+        </div>
+    </md-content>
+
+
+
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/hammerjs/hammer.min.js"></script>
+    <script src="bower_components/angular-material/angular-material.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
